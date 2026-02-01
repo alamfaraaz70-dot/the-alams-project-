@@ -1,0 +1,9 @@
+{
+  "name": "DEJA VU - Visual Assistant",
+  "description": "An accessibility-focused visual assistant for blind and low-vision users that describes the camera feed and location in real-time using Gemini Live API.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
