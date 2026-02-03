@@ -24,7 +24,11 @@ export async function decodeAudioData(
   sampleRate: number,
   numChannels: number,
 ): Promise<AudioBuffer> {
-  const dataInt16 = new Int16Array(data.buffer);
+  // PCM data must be 2-byte aligned for Int16Array. 
+  // If we get an odd number of bytes, we trim the last one to avoid RangeError.
+  const alignedLength = data.length - (data.length % 2);
+  const dataInt16 = new Int16Array(data.buffer, 0, alignedLength / 2);
+  
   const frameCount = dataInt16.length / numChannels;
   const buffer = ctx.createBuffer(numChannels, frameCount, sampleRate);
 
